@@ -1,11 +1,12 @@
 // Problem: Forecast.io only takes lattitude and longitude arguments. If we're given a zip code, we need to convert.
 
 var http = require("http");
+var forecast = require("./forecastio.js");
 
-function printCoordinates(zipCode, lattitude, longitude) {
-	var coordinates = "The zip code " + zipCode + " has the coordinates of " + lattitude + " ," + longitude;
-	console.log(coordinates);
-}
+// function printCoordinates(zipCode, lattitude, longitude) {
+// 	var coordinates = "The zip code " + zipCode + " has the coordinates of " + latitude + ", " + longitude;
+// 	console.log(coordinates);
+// }
 
 // Print out error messages
 function printError(error) {
@@ -26,11 +27,14 @@ function get(zipCode) {
 			if(response.statusCode == 200) {
 				// Parse the data
 				try {
+					// Set the variable zipInfo to the JSON data
 					var zipInfo = JSON.parse(body);
+					// Assign variables for zipCode, latitude, and longitude
 					zipCode = zipInfo.postalCodes[0].postalCode;
-					lattitude = zipInfo.postalCodes[0].lat;
+					latitude = zipInfo.postalCodes[0].lat;
 					longitude = zipInfo.postalCodes[0].lng;
-					printCoordinates(zipCode, lattitude, longitude);
+					// Get the forecast for the latitude and longitude
+					forecast.get(latitude,longitude);
 				} catch(error) {
 					// Parse error
 					printError(error);
