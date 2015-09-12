@@ -27,7 +27,10 @@ function get(zipCode) {
 				// Parse the data
 				try {
 					var zipInfo = JSON.parse(body);
-					console.log(zipInfo.postalCodes[0].postalCode);
+					zipCode = zipInfo.postalCodes[0].postalCode;
+					lattitude = zipInfo.postalCodes[0].lat;
+					longitude = zipInfo.postalCodes[0].lng;
+					printCoordinates(zipCode, lattitude, longitude);
 				} catch(error) {
 					// Parse error
 					printError(error);
