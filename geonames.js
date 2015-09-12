@@ -14,19 +14,20 @@ function printError(error) {
 
 function get(zipCode) {
 	// Connect to Geonames API
-	var request = http.get("http://api.geonames.org/postalCodeSearch?postalcode=" + zipCode + "&maxRows=1&username=jeremey", function (response){
+	var request = http.get("http://api.geonames.org/postalCodeSearchJSON?postalcode=" + zipCode + "&maxRows=1&username=jeremey", function (response){
 		var body = "";
 		// Read the data
 		response.on('data', function (chunk) {
+			// Add the data to a chunk
 			body += chunk;
-			console.log(body);
 		});
 		
 		response.on('end', function() {
 			if(response.statusCode == 200) {
 				// Parse the data
 				try {
-					// // Print the data
+					var zipInfo = JSON.parse(body);
+					console.log(zipInfo.postalCodes[0].postalCode);
 				} catch(error) {
 					// Parse error
 					printError(error);
