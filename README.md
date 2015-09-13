@@ -12,4 +12,8 @@ After downloading the project files and installing Node.js, you can run the prog
 
 ```node request.js 33811```
 
+The program accepts an unlimited number of zip codes so you could run:
+
+```node request.js 33811 33803, 80005, 80301```
+
 This project was suggested in the [Treehouse Fullstack JavaScript course](https://teamtreehouse.com/tracks/fullstack-javascript).
